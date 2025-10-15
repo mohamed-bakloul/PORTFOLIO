@@ -1,6 +1,13 @@
 # Mohamed Bakloul - Data Analyst Portfolio
 
+
 A modern, SEO-optimized portfolio website showcasing Mohamed Bakloul's expertise in data analysis, business intelligence, and data visualization.
+
+<img width="1918" height="810" alt="p1" src="https://github.com/user-attachments/assets/a4042294-e03f-48f3-988b-4595b9f20371" />
+
+<img width="1918" height="867" alt="p2" src="https://github.com/user-attachments/assets/4e5b50d2-c8ec-499a-9fd7-a5d23f11df3b" />
+
+<img width="1918" height="868" alt="p3" src="https://github.com/user-attachments/assets/fa6e85b6-d4f8-43d9-9129-bf0c53c53296" />
 
 ## 🚀 Features
 
