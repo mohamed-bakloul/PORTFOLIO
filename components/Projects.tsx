@@ -240,7 +240,7 @@ export default function Projects() {
                                         viewport={{ once: true }}
                                         transition={{ delay: 0.7 + index * 0.1 }}
                                     >
-                                        View Project Details
+                                        {t('projects.viewDetails')}
                                     </motion.button>
                                 </div>
                             </motion.div>

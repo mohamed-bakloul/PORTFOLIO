@@ -1,46 +1,47 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useMemo } from 'react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function Services() {
-    const { t } = useLanguage()
+    const { t, language } = useLanguage()
 
-    const services = [
+    const services = useMemo(() => [
         {
-            title: "Frontend Development",
-            description: "Building modern, responsive web applications using React, Next.js, and other cutting-edge technologies.",
+            title: t('services.frontend.title'),
+            description: t('services.frontend.description'),
             icon: (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <circle cx="12" cy="12" r="10" stroke="#2563eb" strokeWidth="2" fill="none" />
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                 </svg>
             ),
             color: "from-blue-500 to-blue-600",
-            features: ["React/Next.js", "Responsive Design", "Performance Optimization"]
+            features: [t('services.frontend.feature1'), t('services.frontend.feature2'), t('services.frontend.feature3')]
         },
         {
-            title: "Data Analytics & Visualization",
-            description: "Transform raw data into actionable insights through advanced analytics and compelling visualizations using Power BI, Excel, and other BI tools.",
+            title: t('services.data.title'),
+            description: t('services.data.description'),
             icon: (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <rect x="4" y="4" width="16" height="16" stroke="#7c3aed" strokeWidth="2" fill="none" />
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
             ),
             color: "from-purple-500 to-purple-600",
-            features: ["Dashboard Creation", "KPI Tracking", "Interactive Reports"]
+            features: [t('services.data.feature1'), t('services.data.feature2'), t('services.data.feature3')]
         },
         {
-            title: "Full Stack Development",
-            description: "Creating end-to-end web applications with modern frontend and backend technologies.",
+            title: t('services.fullstack.title'),
+            description: t('services.fullstack.description'),
             icon: (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <rect x="4" y="4" width="16" height="16" stroke="#10b981" strokeWidth="2" fill="none" />
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
                 </svg>
             ),
             color: "from-emerald-500 to-emerald-600",
-            features: ["API Development", "Database Design", "Authentication"]
+            features: [t('services.fullstack.feature1'), t('services.fullstack.feature2'), t('services.fullstack.feature3')]
         }
-    ]
+    ], [t, language])
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -83,10 +84,10 @@ export default function Services() {
             >
                 <motion.div className="text-center mb-20" variants={itemVariants}>
                     <h2 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-8">
-                        Services I Offer
+                        {t('services.title')}
                     </h2>
                     <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                        Specialized in turning complex data into clear, actionable insights that drive business growth
+                        {t('services.subtitle')}
                     </p>
                 </motion.div>
 

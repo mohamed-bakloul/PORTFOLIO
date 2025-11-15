@@ -24,7 +24,8 @@ export default function About() {
     { name: "Data Visualization", icon: "📊", color: "from-indigo-500 to-indigo-600" },
     { name: "ETL", icon: "🔍", color: "from-orange-500 to-orange-600" },
     { name: "CSV", icon: "📋", color: "from-red-500 to-red-600" },
-    { name: "Data Cleaning", icon: "🔧", color: "from-emerald-500 to-emerald-600" }
+    { name: "Data Cleaning", icon: "🔧", color: "from-emerald-500 to-emerald-600" },
+    { name: "web dev", icon: "💻", color: "from-pink-500 to-pink-600" }
     ]
 
     const containerVariants = {
@@ -179,8 +180,8 @@ export default function About() {
                         >
                             🎯
                         </motion.div>
-                        <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Data Analysis</h4>
-                        <p className="text-gray-600 dark:text-gray-300">Transforming raw data into actionable insights</p>
+                        <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{t('about.dataAnalysis.title')}</h4>
+                        <p className="text-gray-600 dark:text-gray-300">{t('about.dataAnalysis.description')}</p>
                     </motion.div>
 
                     <motion.div 
@@ -195,8 +196,8 @@ export default function About() {
                         >
                             🚀
                         </motion.div>
-                        <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Web Development</h4>
-                        <p className="text-gray-600 dark:text-gray-300">Building modern, responsive applications</p>
+                        <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">{t('about.webDevelopment.title')}</h4>
+                        <p className="text-gray-600 dark:text-gray-300">{t('about.webDevelopment.description')}</p>
                     </motion.div>
                 </motion.div>
             </motion.div>

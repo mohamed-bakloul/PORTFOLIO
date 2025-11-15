@@ -1,9 +1,48 @@
 'use client'
 
+import { useRef, useState } from 'react'
+import emailjs from '@emailjs/browser'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function Contact() {
     const { t } = useLanguage()
+    const formRef = useRef<HTMLFormElement>(null)
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error' | null, message: string }>({ type: null, message: '' })
+
+    // EmailJS configuration - Replace these with your actual IDs
+    const serviceID = "service_jn5d5ej" // Replace with your EmailJS Service ID
+    const templateID = "template_8ub5ub8" // Replace with your EmailJS Template ID
+    const publicKey = "QZZ1OrtJbBaMlvjuo" // Replace with your EmailJS Public Key
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        
+        if (!formRef.current) return
+
+        setIsSubmitting(true)
+        setSubmitStatus({ type: null, message: '' })
+
+        try {
+            await emailjs.sendForm(serviceID, templateID, formRef.current, publicKey)
+            
+            setSubmitStatus({ 
+                type: 'success', 
+                message: t('contact.form.success') || 'Message sent successfully!'
+            })
+            
+            // Reset form
+            formRef.current.reset()
+        } catch (error) {
+            console.error('EmailJS Error:', error)
+            setSubmitStatus({ 
+                type: 'error', 
+                message: t('contact.form.error') || 'Failed to send message. Please try again.'
+            })
+        } finally {
+            setIsSubmitting(false)
+        }
+    }
 
     return (
         <section id="contact" className="py-20 bg-gradient-to-br from-blue-600 to-purple-700">
@@ -64,31 +103,55 @@ export default function Contact() {
                     </div>
                 </div>
 
-                <form className="max-w-2xl mx-auto">
+                <form ref={formRef} onSubmit={handleSubmit} className="max-w-2xl mx-auto">
                     <div className="grid md:grid-cols-2 gap-6 mb-6">
                         <input
                             type="text"
+                            name="user_name"
                             placeholder={t('contact.form.name')}
+                            required
                             className="w-full px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-white/50"
                         />
                         <input
                             type="email"
+                            name="user_email"
                             placeholder={t('contact.form.email')}
+                            required
                             className="w-full px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-white/50"
                         />
                     </div>
                     <input
                         type="text"
+                        name="project_type"
                         placeholder={t('contact.form.projectType')}
+                        required
                         className="w-full px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-white/50 mb-6"
                     />
                     <textarea
+                        name="message"
                         placeholder={t('contact.form.message')}
                         rows={5}
+                        required
                         className="w-full px-4 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 text-white placeholder-blue-200 focus:outline-none focus:ring-2 focus:ring-white/50 mb-6"
                     ></textarea>
-                    <button className="px-8 py-3 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-colors duration-300 font-semibold">
-                        {t('contact.form.send')}
+                    
+                    {/* Success/Error Messages */}
+                    {submitStatus.type && (
+                        <div className={`mb-4 p-4 rounded-lg ${
+                            submitStatus.type === 'success' 
+                                ? 'bg-green-500/20 border border-green-400 text-green-100' 
+                                : 'bg-red-500/20 border border-red-400 text-red-100'
+                        }`}>
+                            {submitStatus.message}
+                        </div>
+                    )}
+                    
+                    <button 
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="px-8 py-3 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-colors duration-300 font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        {isSubmitting ? (t('contact.form.sending') || 'Sending...') : t('contact.form.send')}
                     </button>
                 </form>
 
